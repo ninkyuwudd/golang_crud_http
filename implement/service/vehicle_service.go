@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"learn_http_interface/implement/model"
 	"learn_http_interface/implement/repository/vehicle"
 )
@@ -39,5 +40,12 @@ func (v vehicleService) DeleteVehicle(id int) error {
 }
 
 func (v vehicleService) UpdateVehicle(data *model.Vehicle) error {
+	existingVehicle, err := v.repo.GetVehicleById(data.Id)
+	if err != nil {
+		return err
+	}
+	if existingVehicle == nil {
+		return errors.New("Vehicle Not Found")
+	}
 	return v.repo.UpdateVehicle(data)
 }

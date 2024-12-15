@@ -9,8 +9,8 @@ import (
 func main() {
 	mux := routes.RegisterRoutes()
 
-	log.Println("Server is running on http://localhost:8080")
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	log.Println("Server is running on http://127.0.0.1:3000")
+	if err := http.ListenAndServe("127.0.0.1:3000", mux); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
 }
